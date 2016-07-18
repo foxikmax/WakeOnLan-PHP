@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    
+    {% include 'header.twig' %}
+
+    <body background="img/backgrounds/background.jpg">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="index.php">WakeOnLan</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav nav-main">
+                            <li class="active"><a class="index" href="#">Главная</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container well">
+            <div class="row">
+                <div class="span12">
+                    <div class="add">
+
+                        <table class='table table-bordered table-hover tableComputers'>
+                            <thead>
+                                <tr>
+                                    <th>Название</th>
+                                    <th>MAC</th>
+                                    <th>Network</th>
+                                    <th>Пуск</th>
+                                    <th>Статус</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for comp in comps %}
+                                    <tr>
+                                        <td>{{comp.name}}</td>
+                                        <td><p class='label label-info' align="center">{{comp.mac}}</p></td>
+                                        <td><p class='label label-info' id='ip{{comp.id}}' align="center">{{comp.net}}</p></td>
+                                        <td><button class='btn btn-success btn-small btnStart{{comp.id}}' onClick='start({{comp.id}}, "{{comp.mac}}", "{{comp.net}}")'>Запустить</button></td>
+                                        <td><p class='label label-warning' id='ping{{comp.id}}' align="center">Не определен</p></td>
+                                        <input type='hidden' class='pingPcId' value='{{comp.id}}'>
+                                     </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div><!-- .add -->
+                </div><!-- .span12 -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+
+        <div class="alert alert-success hide"><a class="close-alert " data-hide="alert-success">×</a><div class="alert-success-text"></div></div>
+        <div class="alert alert-error hide"><a class="close-alert " data-hide="alert-error">×</a><div class="alert-error-text"></div></div>
+        <div class="alert alert-block hide"><a class="close-alert" data-hide="alert-block">×</a><div class="alert-block-text"></div></div>
+        <div class="alert alert-info hide"><a class="close-alert" data-hide="alert-info">×</a><div class="alert-info-text"></div></div>
+    </body>
+</html>
